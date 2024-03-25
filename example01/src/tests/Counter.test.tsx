@@ -1,6 +1,5 @@
-/* eslint-disable testing-library/no-unnecessary-act */
 import React from "react";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Counter from "../counter/Counter";
 
@@ -29,8 +28,8 @@ test("+ 버튼이 있다.", () => {
 test("+ 버튼을 클릭하면 카운터가 1 증가한다.", async () => {
   render(<Counter />);
   const plusButton = screen.getByRole("button", { name: /plus/i });
-  await act(() => {
-    userEvent.click(plusButton);
+  await waitFor(async () => {
+    await userEvent.click(plusButton);
   });
 
   const counterElement = screen.getByTestId("counter");
@@ -41,8 +40,8 @@ test("+ 버튼을 클릭하면 카운터가 1 증가한다.", async () => {
 test("- 버튼을 클릭하면 카운터가 1 감소한다.", async () => {
   render(<Counter />);
   const minusButton = screen.getByRole("button", { name: /minus/i });
-  await act(() => {
-    userEvent.click(minusButton);
+  await waitFor(async () => {
+    await userEvent.click(minusButton);
   });
 
   const counterElement = screen.getByTestId("counter");
@@ -56,8 +55,8 @@ test("카운터가 0일 때 - 버튼을 클릭하면 카운터는 0이다.", asy
   expect(counterElement).toHaveTextContent("0");
 
   const minusButton = screen.getByRole("button", { name: /minus/i });
-  await act(() => {
-    userEvent.click(minusButton);
+  await waitFor(async () => {
+    await userEvent.click(minusButton);
   });
 
   expect(counterElement).toHaveTextContent("0");
@@ -67,7 +66,7 @@ test("카운터가 0일 때 - 버튼을 클릭하면 카운터는 0이다.", asy
 test("on/off 버튼을 클릭하면 +, - 버튼이 비활성화된다.", async () => {
   render(<Counter />);
   const onOffButton = screen.getByRole("button", { name: /onoff/i });
-  await act(() => userEvent.click(onOffButton));
+  await waitFor(async () => await userEvent.click(onOffButton));
 
   const minusButton = screen.getByRole("button", { name: /minus/i });
   const plusButton = screen.getByRole("button", { name: /plus/i });
