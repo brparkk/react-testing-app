@@ -1,5 +1,7 @@
+/* eslint-disable testing-library/no-unnecessary-act */
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Counter from "../counter/Counter";
 
 // 카운터는 0부터 시작한다.
@@ -24,42 +26,48 @@ test("+ 버튼이 있다.", () => {
 });
 
 // + 버튼을 클릭하면 카운터가 1 증가한다.
-test("+ 버튼을 클릭하면 카운터가 1 증가한다.", () => {
+test("+ 버튼을 클릭하면 카운터가 1 증가한다.", async () => {
   render(<Counter />);
   const plusButton = screen.getByRole("button", { name: /plus/i });
-  fireEvent.click(plusButton);
+  await act(() => {
+    userEvent.click(plusButton);
+  });
 
   const counterElement = screen.getByTestId("counter");
   expect(counterElement).toHaveTextContent("1");
 });
 
 // - 버튼을 클릭하면 카운터가 1 감소한다.
-test("- 버튼을 클릭하면 카운터가 1 감소한다.", () => {
+test("- 버튼을 클릭하면 카운터가 1 감소한다.", async () => {
   render(<Counter />);
   const minusButton = screen.getByRole("button", { name: /minus/i });
-  fireEvent.click(minusButton);
+  await act(() => {
+    userEvent.click(minusButton);
+  });
 
   const counterElement = screen.getByTestId("counter");
   expect(counterElement).toHaveTextContent("0");
 });
 
 // 카운터가 0일 때 - 버튼을 클릭하면 카운터는 0이다.
-test("카운터가 0일 때 - 버튼을 클릭하면 카운터는 0이다.", () => {
+test("카운터가 0일 때 - 버튼을 클릭하면 카운터는 0이다.", async () => {
   render(<Counter />);
   const counterElement = screen.getByTestId("counter");
   expect(counterElement).toHaveTextContent("0");
 
   const minusButton = screen.getByRole("button", { name: /minus/i });
-  fireEvent.click(minusButton);
+  await act(() => {
+    userEvent.click(minusButton);
+  });
 
   expect(counterElement).toHaveTextContent("0");
 });
 
 // on/off 버튼을 클릭하면 +, - 버튼이 비활성화된다.
-test("on/off 버튼을 클릭하면 +, - 버튼이 비활성화된다.", () => {
+test("on/off 버튼을 클릭하면 +, - 버튼이 비활성화된다.", async () => {
   render(<Counter />);
   const onOffButton = screen.getByRole("button", { name: /onoff/i });
-  fireEvent.click(onOffButton);
+  await act(() => userEvent.click(onOffButton));
 
   const minusButton = screen.getByRole("button", { name: /minus/i });
   const plusButton = screen.getByRole("button", { name: /plus/i });
