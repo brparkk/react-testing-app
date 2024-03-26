@@ -19,6 +19,7 @@ function SummaryPage() {
       <input
         type="checkbox"
         id="confirm-order"
+        checked={checked}
         onChange={(e) => setChecked(e.target.checked)}
       />
       <label htmlFor="confirm-order">주문하려는 것을 확인하셨나요?</label>
