@@ -6,3 +6,6 @@
 - [2탄, 프론트엔드 테스트 - (2) React Testing Library](https://rachelslab.tistory.com/174)
 - [3탄, 프론트엔드 테스트 - (3) React Testing Library 실습 (feat. TDD)](https://rachelslab.tistory.com/175)
 - [4탄, 프론트엔드 테스트 - (4) RTL - 쿼리 우선 순위, userEvent](https://rachelslab.tistory.com/176)
+- [4탄, 프론트엔드 테스트 - (4) RTL - 쿼리 우선 순위, userEvent](https://rachelslab.tistory.com/176)
+- [5탄, 프론트엔드 테스트 - (5) toBe() vs toEqual() vs toBeTruthy](https://rachelslab.tistory.com/179)
+
